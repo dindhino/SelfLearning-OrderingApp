@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingApp", "OrderingApp\OrderingApp.csproj", "{368FC5A7-D0B1-4DEB-BC03-094E24DBB918}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingApp", "OrderingApp\OrderingApp.csproj", "{58D596A3-435E-4D8B-A419-79A52A05FFE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{368FC5A7-D0B1-4DEB-BC03-094E24DBB918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{368FC5A7-D0B1-4DEB-BC03-094E24DBB918}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{368FC5A7-D0B1-4DEB-BC03-094E24DBB918}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{368FC5A7-D0B1-4DEB-BC03-094E24DBB918}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D596A3-435E-4D8B-A419-79A52A05FFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D596A3-435E-4D8B-A419-79A52A05FFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D596A3-435E-4D8B-A419-79A52A05FFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D596A3-435E-4D8B-A419-79A52A05FFE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {0BC7B1D6-AC6C-42B8-B079-1F5662A154E7}
+		SolutionGuid = {C1954DBA-F3E5-47F5-A4DA-6B02CAC37D9F}
 	EndGlobalSection
 EndGlobal
