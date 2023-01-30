@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderingApp", "OrderingApp\OrderingApp.csproj", "{58D596A3-435E-4D8B-A419-79A52A05FFE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderingApp", "OrderingApp\OrderingApp.csproj", "{58D596A3-435E-4D8B-A419-79A52A05FFE0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderingApp.Model", "Code\Model\OrderingApp.Model.csproj", "{05043085-B1C4-4935-BD1C-CFD2BBDC2E3E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderingApp.Persistence", "Code\Persistence\OrderingApp.Persistence.csproj", "{35ED6511-B71E-4623-876C-CC7CEF1C2F40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{58D596A3-435E-4D8B-A419-79A52A05FFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58D596A3-435E-4D8B-A419-79A52A05FFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{58D596A3-435E-4D8B-A419-79A52A05FFE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05043085-B1C4-4935-BD1C-CFD2BBDC2E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05043085-B1C4-4935-BD1C-CFD2BBDC2E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05043085-B1C4-4935-BD1C-CFD2BBDC2E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05043085-B1C4-4935-BD1C-CFD2BBDC2E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35ED6511-B71E-4623-876C-CC7CEF1C2F40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35ED6511-B71E-4623-876C-CC7CEF1C2F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35ED6511-B71E-4623-876C-CC7CEF1C2F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35ED6511-B71E-4623-876C-CC7CEF1C2F40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
