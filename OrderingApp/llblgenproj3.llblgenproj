@@ -117,6 +117,26 @@
       </LastUsedPreferences>
     </OutputType>
   </CodeGenerationCyclePreferences>
+  <OutputSettingValues>
+    <SettingValues>
+      <SettingValue Name="1:CollectionNavigatorTypeDefault" Value="List&lt;T&gt;" Type="18" />
+      <SettingValue Name="1:EmitForeignKeyFields" Value="true" Type="3" />
+      <SettingValue Name="1:EntityBaseClassNameDefault" Value="CommonEntityBase" Type="18" />
+      <SettingValue Name="1:GenerateAsVirtualPropertyDefault" Value="true" Type="3" />
+      <SettingValue Name="1:GenerateDbContextOptionsCtorInDbContext" Value="true" Type="3" />
+      <SettingValue Name="1:GenerateReadOnlyFieldsAsReadOnlyProperties" Value="true" Type="3" />
+      <SettingValue Name="1:MapUnmappedFieldsAsShadowPropertiesDefault" Value="false" Type="3" />
+      <SettingValue Name="1:SupportedActionCombinations" Value="0,4" Type="18" />
+      <SettingValue Name="1:SupportsKeyLessEntities" Value="true" Type="3" />
+      <SettingValue Name="1:SupportsManyToManyRelationships" Value="true" Type="3" />
+      <SettingValue Name="1:SupportsRequiredValueTypes" Value="true" Type="3" />
+      <SettingValue Name="1:SupportsTemporalTables" Value="true" Type="3" />
+      <SettingValue Name="1:SupportsTPEInheritance" Value="true" Type="3" />
+      <SettingValue Name="1:UseNullableReferenceTypes" Value="true" Type="3" />
+      <SettingValue Name="1:UsePrivateBackingFieldDefault" Value="false" Type="3" />
+      <SettingValue Name="1:ValueTypeBaseClassNameDefault" Value="CommonValueTypeBase" Type="18" />
+    </SettingValues>
+  </OutputSettingValues>
   <CodeGenerationMetaDataDefaults />
   <EntityModel>
     <ValueTypeDefinitions />
@@ -128,6 +148,20 @@
           <Field Name="PhoneNo" Type="string" IsOptional="true" MaxLength="45" />
         </Fields>
       </EntityDefinition>
+      <EntityDefinition Name="Order" ObjectID="0edae4d0-63a5-4718-a75a-0b3c4a281e34">
+        <Fields>
+          <Field Name="CustomerId" Type="int" Precision="10" />
+          <Field Name="Id" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+        </Fields>
+      </EntityDefinition>
+      <EntityDefinition Name="OrderItem" ObjectID="e1290ca9-c6c3-4e92-b67c-dd25df201905">
+        <Fields>
+          <Field Name="Id" Type="int" IsReadOnly="true" Precision="10" IsPrimaryKey="true" />
+          <Field Name="OrderId" Type="int" Precision="10" />
+          <Field Name="ProductId" Type="int" Precision="10" />
+          <Field Name="Quantity" Type="int" IsOptional="true" Precision="10" />
+        </Fields>
+      </EntityDefinition>
       <EntityDefinition Name="Product" ObjectID="a460771f-7e3b-452f-ae97-74516389197d">
         <Fields>
           <Field Name="Description" Type="string" IsOptional="true" MaxLength="2147483647" />
@@ -136,7 +170,23 @@
         </Fields>
       </EntityDefinition>
     </EntityDefinitions>
-    <Relationships />
+    <Relationships>
+      <NormalRelationship Name="Order.Customer-Customer.Orders" Start=":Order" End=":Customer" StartNavigator="Customer" EndNavigator="Orders" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="CustomerId" PkField="Id" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="OrderItem.Order-Order.OrderItems" Start=":OrderItem" End=":Order" StartNavigator="Order" EndNavigator="OrderItems" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="OrderId" PkField="Id" />
+        </FieldRelationships>
+      </NormalRelationship>
+      <NormalRelationship Name="OrderItem.Product-Product.OrderItems" Start=":OrderItem" End=":Product" StartNavigator="Product" EndNavigator="OrderItems" Type="4">
+        <FieldRelationships>
+          <FieldFieldRelationship FkField="ProductId" PkField="Id" />
+        </FieldRelationships>
+      </NormalRelationship>
+    </Relationships>
     <InheritanceHierarchies />
   </EntityModel>
   <TargetDatabases>
@@ -153,9 +203,9 @@
         <Sequence Name="@@IDENTITY" />
       </SystemSequences>
       <Catalogs>
-        <Catalog Name="OrderingApp" SyncSource="2">
+        <Catalog Name="OrderingApp">
           <Schemas>
-            <Schema Name="dbo" SyncSource="2" LastSyncWithDatabase="2023-01-27T08:50:19.5600265Z">
+            <Schema Name="dbo" SyncSource="2" LastSyncWithDatabase="2023-01-30T06:29:45.6929232Z">
               <Tables>
                 <Table Name="Customers">
                   <PkConstraintName Name="PK_Customers" />
@@ -163,6 +213,22 @@
                     <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
                     <Field Name="Name" Ordinal="2" DbType="24" Length="50" />
                     <Field Name="PhoneNo" Ordinal="3" IsOptional="true" DbType="24" Length="45" />
+                  </Fields>
+                </Table>
+                <Table Name="OrderItems">
+                  <PkConstraintName Name="PK_OrderItems" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="OrderID" Ordinal="2" DbType="8" Precision="10" />
+                    <Field Name="ProductID" Ordinal="3" DbType="8" Precision="10" />
+                    <Field Name="Quantity" Ordinal="4" IsOptional="true" DbType="8" Precision="10" />
+                  </Fields>
+                </Table>
+                <Table Name="Orders">
+                  <PkConstraintName Name="PK_Orders" />
+                  <Fields>
+                    <Field Name="ID" Ordinal="1" IsIdentity="true" IsPrimaryKey="true" DbType="8" Precision="10" />
+                    <Field Name="CustomerID" Ordinal="2" DbType="8" Precision="10" />
                   </Fields>
                 </Table>
                 <Table Name="Products">
@@ -176,6 +242,23 @@
               </Tables>
             </Schema>
           </Schemas>
+          <ForeignKeyConstraints>
+            <ForeignKeyConstraint Name="dbo:OrderItems:FK_OrderItems_OrderId">
+              <FieldPairs>
+                <FieldPair PkField="dbo:Orders:ID" FkField="dbo:OrderItems:OrderID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:OrderItems:FK_OrderItems_ProductID">
+              <FieldPairs>
+                <FieldPair PkField="dbo:Products:ID" FkField="dbo:OrderItems:ProductID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+            <ForeignKeyConstraint Name="dbo:Orders:FK_Order">
+              <FieldPairs>
+                <FieldPair PkField="dbo:Customers:ID" FkField="dbo:Orders:CustomerID" />
+              </FieldPairs>
+            </ForeignKeyConstraint>
+          </ForeignKeyConstraints>
         </Catalog>
       </Catalogs>
     </TargetDatabase>
@@ -188,6 +271,20 @@
             <FieldMapping FieldName="Id" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
             <FieldMapping FieldName="Name" TargetFieldName="Name" />
             <FieldMapping FieldName="PhoneNo" TargetFieldName="PhoneNo" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":Order" TargetName="OrderingApp:dbo:Orders">
+          <FieldMappings>
+            <FieldMapping FieldName="CustomerId" TargetFieldName="CustomerID" />
+            <FieldMapping FieldName="Id" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+          </FieldMappings>
+        </EntityMapping>
+        <EntityMapping EntityName=":OrderItem" TargetName="OrderingApp:dbo:OrderItems">
+          <FieldMappings>
+            <FieldMapping FieldName="Id" TargetFieldName="ID" SequenceToUse="SCOPE_IDENTITY()" />
+            <FieldMapping FieldName="OrderId" TargetFieldName="OrderID" />
+            <FieldMapping FieldName="ProductId" TargetFieldName="ProductID" />
+            <FieldMapping FieldName="Quantity" TargetFieldName="Quantity" />
           </FieldMappings>
         </EntityMapping>
         <EntityMapping EntityName=":Product" TargetName="OrderingApp:dbo:Products">

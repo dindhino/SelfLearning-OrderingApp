@@ -55,6 +55,10 @@ namespace OrderingApp
 
 		/// <summary>Gets an object query for the entity set 'Customer', containing entity type 'Customer'</summary>
 		public DbSet<Customer> Customers { get; set; } 
+		/// <summary>Gets an object query for the entity set 'Order', containing entity type 'Order'</summary>
+		public DbSet<Order> Orders { get; set; } 
+		/// <summary>Gets an object query for the entity set 'OrderItem', containing entity type 'OrderItem'</summary>
+		public DbSet<OrderItem> OrderItems { get; set; } 
 		/// <summary>Gets an object query for the entity set 'Product', containing entity type 'Product'</summary>
 		public DbSet<Product> Products { get; set; } 
 	}

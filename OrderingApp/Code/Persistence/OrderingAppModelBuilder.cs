@@ -18,6 +18,8 @@ namespace OrderingApp
 		{
 			modelBuilder.HasDefaultSchema("dbo");
 			MapCustomer(modelBuilder.Entity<Customer>());
+			MapOrder(modelBuilder.Entity<Order>());
+			MapOrderItem(modelBuilder.Entity<OrderItem>());
 			MapProduct(modelBuilder.Entity<Product>());
 		}
 
@@ -30,6 +32,31 @@ namespace OrderingApp
 			config.Property(t => t.Id).HasColumnName("ID").ValueGeneratedOnAdd();
 			config.Property(t => t.Name).HasMaxLength(50).IsRequired();
 			config.Property(t => t.PhoneNo).HasMaxLength(45);
+		}
+
+		/// <summary>Defines the mapping information for the entity 'Order'</summary>
+		/// <param name="config">The configuration to modify.</param>
+		protected virtual void MapOrder(EntityTypeBuilder<Order> config)
+		{
+			config.ToTable("Orders");
+			config.HasKey(t => t.Id);
+			config.Property(t => t.Id).HasColumnName("ID").ValueGeneratedOnAdd();
+			config.Property(t => t.CustomerId).HasColumnName("CustomerID");
+			config.HasOne(t => t.Customer).WithMany(t => t.Orders).HasForeignKey(t => t.CustomerId);
+		}
+
+		/// <summary>Defines the mapping information for the entity 'OrderItem'</summary>
+		/// <param name="config">The configuration to modify.</param>
+		protected virtual void MapOrderItem(EntityTypeBuilder<OrderItem> config)
+		{
+			config.ToTable("OrderItems");
+			config.HasKey(t => t.Id);
+			config.Property(t => t.Id).HasColumnName("ID").ValueGeneratedOnAdd();
+			config.Property(t => t.OrderId).HasColumnName("OrderID");
+			config.Property(t => t.ProductId).HasColumnName("ProductID");
+			config.Property(t => t.Quantity);
+			config.HasOne(t => t.Order).WithMany(t => t.OrderItems).HasForeignKey(t => t.OrderId);
+			config.HasOne(t => t.Product).WithMany(t => t.OrderItems).HasForeignKey(t => t.ProductId);
 		}
 
 		/// <summary>Defines the mapping information for the entity 'Product'</summary>

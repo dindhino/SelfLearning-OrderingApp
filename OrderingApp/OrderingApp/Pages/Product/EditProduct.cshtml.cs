@@ -12,31 +12,31 @@ using OrderingApp.Data;
 namespace OrderingApp.Pages
 {
     [Authorize]
-    public class EditCustomerModel : PageModel
+    public class EditProductModel : PageModel
     {
         private readonly OrderingApp.OrderingAppDataContext _context;
 
-        public EditCustomerModel(OrderingApp.OrderingAppDataContext context)
+        public EditProductModel(OrderingApp.OrderingAppDataContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public OrderingApp.EntityClasses.Customer Customer { get; set; } = default!;
+        public OrderingApp.EntityClasses.Product Product { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Customers == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var customer =  await _context.Customers.FirstOrDefaultAsync(m => m.Id == id);
-            if (customer == null)
+            var product =  await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
+            if (product == null)
             {
                 return NotFound();
             }
-            Customer = customer;
+            Product = product;
             return Page();
         }
 
@@ -49,19 +49,19 @@ namespace OrderingApp.Pages
                 return Page();
             }
 
-            if (id == null || _context.Customers == null)
+            if (id == null || _context.Products == null)
             {
                 return NotFound();
             }
 
-            var customer = await _context.Customers.FindAsync(id);
+            var product = await _context.Products.FindAsync(id);
 
-            if (customer != null)
+            if (product != null)
             {
-                customer.Name = Customer.Name;
-                customer.PhoneNo = Customer.PhoneNo;
-                Customer = customer;
-                _context.Attach(Customer).State = EntityState.Modified;
+                product.Name = Product.Name;
+                product.Description = Product.Description;
+                Product = product;
+                _context.Attach(Product).State = EntityState.Modified;
             }
 
             try
@@ -70,7 +70,7 @@ namespace OrderingApp.Pages
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CustomerExists(Customer.Id))
+                if (!ProductExists(Product.Id))
                 {
                     return NotFound();
                 }
@@ -80,12 +80,12 @@ namespace OrderingApp.Pages
                 }
             }
 
-            return RedirectToPage("./IndexCustomer");
+            return RedirectToPage("./IndexProduct");
         }
 
-        private bool CustomerExists(int id)
+        private bool ProductExists(int id)
         {
-          return _context.Customers.Any(e => e.Id == id);
+          return _context.Products.Any(e => e.Id == id);
         }
     }
 }

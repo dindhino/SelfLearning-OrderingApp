@@ -7,28 +7,27 @@ using System.Collections.Generic;
 
 namespace OrderingApp.EntityClasses
 {
-	/// <summary>Class which represents the entity 'Customer'.</summary>
-	public partial class Customer : CommonEntityBase
+	/// <summary>Class which represents the entity 'Order'.</summary>
+	public partial class Order : CommonEntityBase
 	{
 		/// <summary>Method called from the constructor</summary>
 		partial void OnCreated();
 		private System.Int32 _id = default(System.Int32);
 
-		/// <summary>Initializes a new instance of the <see cref="Customer"/> class.</summary>
-		public Customer() : base()
+		/// <summary>Initializes a new instance of the <see cref="Order"/> class.</summary>
+		public Order() : base()
 		{
-			this.Orders = new List<Order>();
-			this.Name = string.Empty;
+			this.OrderItems = new List<OrderItem>();
 			OnCreated();
 		}
 
+		/// <summary>Gets or sets the CustomerId field. </summary>
+		public System.Int32 CustomerId { get; set; }
 		/// <summary>Gets the Id field. </summary>
 		public System.Int32 Id => _id;
-		/// <summary>Gets or sets the Name field. </summary>
-		public System.String Name { get; set; }
-		/// <summary>Gets or sets the PhoneNo field. </summary>
-		public System.String? PhoneNo { get; set; }
 		/// <summary>Represents the navigator which is mapped onto the association 'Order.Customer - Customer.Orders (m:1)'</summary>
-		public virtual List<Order> Orders { get; set; }
+		public virtual Customer Customer { get; set; } = null!;
+		/// <summary>Represents the navigator which is mapped onto the association 'OrderItem.Order - Order.OrderItems (m:1)'</summary>
+		public virtual List<OrderItem> OrderItems { get; set; }
 	}
 }

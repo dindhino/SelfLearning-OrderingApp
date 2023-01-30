@@ -17,6 +17,7 @@ namespace OrderingApp.EntityClasses
 		/// <summary>Initializes a new instance of the <see cref="Product"/> class.</summary>
 		public Product() : base()
 		{
+			this.OrderItems = new List<OrderItem>();
 			this.Name = string.Empty;
 			OnCreated();
 		}
@@ -27,5 +28,7 @@ namespace OrderingApp.EntityClasses
 		public System.Int32 Id => _id;
 		/// <summary>Gets or sets the Name field. </summary>
 		public System.String Name { get; set; }
+		/// <summary>Represents the navigator which is mapped onto the association 'OrderItem.Product - Product.OrderItems (m:1)'</summary>
+		public virtual List<OrderItem> OrderItems { get; set; }
 	}
 }
