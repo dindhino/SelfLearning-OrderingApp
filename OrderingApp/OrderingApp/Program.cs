@@ -67,6 +67,7 @@ static void TestAPI(string connectionString, WebApplication app)
 {
     OrderingAppDataContext dbContext = new OrderingAppDataContext(new DbContextOptionsBuilder<OrderingAppDataContext>().UseSqlServer(connectionString).Options);
     JustTestAPI_Customer(app, new CustomerController(dbContext));
+    JustTestAPI_Product(app, new ProductController(dbContext));
 }
 
 static void JustTestAPI_Customer(WebApplication app, CustomerController controller)
@@ -76,4 +77,13 @@ static void JustTestAPI_Customer(WebApplication app, CustomerController controll
     app.MapPost("/API/Customer/CreateCustomer", ([FromBody] Customer customer) => controller.CreateCustomer(customer));
     app.MapPut("/API/Customer/UpdateCustomer", ([FromBody] Customer customer, int? id) => controller.UpdateCustomer(customer, id));
     app.MapDelete("/API/Customer/DeleteCustomer", (int? id) => controller.DeleteCustomer(id));
+}
+
+static void JustTestAPI_Product(WebApplication app, ProductController controller)
+{
+    app.MapGet("/API/Product/GetAllProductList", () => controller.GetAllProductList());
+    app.MapGet("/API/Product/GetProduct", (int? id) => controller.GetProduct(id));
+    app.MapPost("/API/Product/CreateProduct", ([FromBody] Product product) => controller.CreateProduct(product));
+    app.MapPut("/API/Product/UpdateProduct", ([FromBody] Product product, int? id) => controller.UpdateProduct(product, id));
+    app.MapDelete("/API/Product/DeleteProduct", (int? id) => controller.DeleteProduct(id));
 }
