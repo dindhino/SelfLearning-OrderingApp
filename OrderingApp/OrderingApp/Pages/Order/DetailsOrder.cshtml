@@ -1,0 +1,43 @@
+﻿@page
+@model OrderingApp.Pages.DetailsOrderModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Customer
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order.Customer.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Order Items
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                int maxIdx = Model.Order.OrderItems.Count;
+                string orderItemsToString = string.Empty;
+                for (int i = 0; i < maxIdx; i++)
+                {
+                    orderItemsToString = (i + 1).ToString() + ". " + Model.Order.OrderItems[i].Product.Name + " - " + Model.Order.OrderItems[i].Quantity.ToString();
+                    @Html.DisplayFor(model => orderItemsToString)
+                    if ((i + 1) < maxIdx)
+                    {
+                        <br/>
+                    }
+                }
+            }
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./EditOrder" asp-route-id="@Model.Order?.Id">Edit</a> |
+    <a asp-page="./IndexOrder">Back to List</a>
+</div>

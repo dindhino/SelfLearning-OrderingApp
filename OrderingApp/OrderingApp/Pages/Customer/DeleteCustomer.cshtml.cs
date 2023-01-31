@@ -21,7 +21,7 @@ namespace OrderingApp.Pages
         }
 
         [BindProperty]
-      public OrderingApp.EntityClasses.Customer Customer { get; set; }
+        public OrderingApp.EntityClasses.Customer Customer { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -36,7 +36,7 @@ namespace OrderingApp.Pages
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 Customer = customer;
             }

@@ -1,0 +1,55 @@
+﻿@page
+@model OrderingApp.Pages.IndexOrderModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="CreateOrder">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Customer
+            </th>
+            <th>
+                Order Items
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Customer.Name)
+                </td>
+                <td>
+                    @{
+                        int maxIdx = item.OrderItems.Count;
+                        string orderItemsToString = string.Empty;
+                        for (int i = 0; i < maxIdx; i++)
+                        {
+                            orderItemsToString = (i + 1).ToString() + ". " + item.OrderItems[i].Product.Name + " - " + item.OrderItems[i].Quantity.ToString();
+                            @Html.DisplayFor(model => orderItemsToString)
+                            if ((i + 1) < maxIdx)
+                            {
+                                <br />
+                            }
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-page="./EditOrder" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./DetailsOrder" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./DeleteOrder" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
