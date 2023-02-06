@@ -23,7 +23,9 @@ namespace OrderingApp.Controller
         {
             try
             {
-                return await _context.Products.ToListAsync();
+                var products = await _context.Products.ToListAsync();
+                products.ForEach(x => x.OrderItems.Clear());
+                return products;
             }
             catch (Exception ex)
             {
@@ -39,6 +41,7 @@ namespace OrderingApp.Controller
                 if (id == null || _context.Products == null)
                     throw new Exception(NotFound);
                 Product? product = await JustGetProduct(id);
+                product.OrderItems.Clear();
                 return product;
             }
             catch (Exception ex)
@@ -52,6 +55,7 @@ namespace OrderingApp.Controller
             var product = await _context.Products.FirstOrDefaultAsync(m => m.Id == id);
             if (product == null)
                 throw new Exception(NotFound);
+            product.OrderItems.Clear();
             return product;
         }
 
@@ -91,6 +95,7 @@ namespace OrderingApp.Controller
                 Product? existingProduct = await JustGetProduct(id);
                 existingProduct.Name = product.Name;
                 existingProduct.Description = product.Description;
+                //product.OrderItems.Clear();
                 product = existingProduct;
                 _context.Attach(product).State = EntityState.Modified;
 
